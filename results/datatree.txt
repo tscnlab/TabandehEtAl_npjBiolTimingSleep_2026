@@ -1,0 +1,10 @@
+TabandehEtAl_npj_2026/
+    ├── README.md
+    └── environment.yml
+code/
+    └── trajectory.ipynb
+data/
+    └── jeti_metadata_summary_tidy_scenes.csv
+results/
+    └── datatree.txt
+│   plots/

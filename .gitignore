@@ -1,0 +1,39 @@
+﻿
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore virtual environments
+venv/
+env/
+.env/
+.venv/
+
+# Ignore Conda environment files
+*.conda
+*.condarc
+pkgs/
+*.tar.bz2
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Jupyter output
+*.nbconvert.ipynb
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+*.bak
+
+# Ignore IDE/project settings
+.vscode/
+.idea/
