@@ -1,4 +1,4 @@
-TabandehEtAl_npj_2026/
+TabandehEtAl_npjBiol.TimingSleep_2026/
     ├── README.md
     └── environment.yml
 code/
@@ -6,5 +6,9 @@ code/
 data/
     └── jeti_metadata_summary_tidy_scenes.csv
 results/
-    └── datatree.txt
+    ├── datatree.txt
+    ├── naive_melanopic_sequence.csv
+    └── sumary_trajectory_canada.csv
 │   plots/
+│       ├── MonteCarlo_stability_Naive_100000.pdf
+│       └── melanopic_ttrajectory_days.pdf
