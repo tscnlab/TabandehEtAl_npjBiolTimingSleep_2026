@@ -7,8 +7,18 @@ data/
     └── jeti_metadata_summary_tidy_scenes.csv
 results/
     ├── datatree.txt
+    ├── naive_indoor_melanopic_sequence.csv
     ├── naive_melanopic_sequence.csv
+    ├── naive_outdoor_melanopic_sequence.csv
     └── sumary_trajectory_canada.csv
 │   plots/
-│       ├── MonteCarlo_stability_Naive_100000.pdf
-│       └── melanopic_ttrajectory_days.pdf
+│       ├── MonteCarlo_stability_naive.pdf
+│       ├── MonteCarlo_stability_naive.png
+│       ├── MonteCarlo_stability_naive_indoor.pdf
+│       ├── MonteCarlo_stability_naive_indoor.png
+│       ├── MonteCarlo_stability_naive_outdoor.pdf
+│       ├── MonteCarlo_stability_naive_outdoor.png
+│       ├── melanopic_trajectory_days.pdf
+│       ├── melanopic_trajectory_days.png
+│       ├── photopic_illuminance_trajectory_days.pdf
+│       └── photopic_illuminance_trajectory_days.png
