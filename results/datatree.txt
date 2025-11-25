@@ -10,7 +10,8 @@ results/
     ├── naive_indoor_melanopic_sequence.csv
     ├── naive_melanopic_sequence.csv
     ├── naive_outdoor_melanopic_sequence.csv
-    └── sumary_trajectory_canada.csv
+    ├── pivot_photopic_melanopic_trajectory_canada.csv
+    └── pivot_summary_trajectory_canada.csv
 │   plots/
 │       ├── MonteCarlo_stability_naive.pdf
 │       ├── MonteCarlo_stability_naive.png
