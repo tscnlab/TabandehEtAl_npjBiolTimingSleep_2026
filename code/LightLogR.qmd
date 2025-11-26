@@ -1,0 +1,228 @@
+---
+title: "LightLogR for metric calculation"
+format: 
+  html:
+    self-contained: true
+    code-link: true
+    code-tools: true
+---
+
+## Preface
+
+This script summarizes simulation runs of light exposure in terms of light exposure metrics and time-based values, both for tables and plots. The relevant data are stored in files that conform to `results/.*_sequence.csv`. Outputs are stored in `results/plots/LightLogR` and `results/tables/LightLogR`.
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+library(tidyverse)
+library(LightLogR)
+library(gt)
+library(glue)
+library(ggtext)
+source("https://raw.githubusercontent.com/MeLiDosProject/Data_Metadata_Conventions/main/scripts/overview_plot.R")
+tz <- "America/Toronto"
+coordinates <- c(45.449, -75.625)
+```
+
+## Worldmap
+
+```{r}
+grand_overview("", coordinates, "Ottawa", "Canada", "#D80621", panels = "map")
+ggsave("../results/plots/LightLogR/worldmap.pdf", height = 3.4)
+```
+
+## Import
+
+```{r}
+path <- "../results"
+files <- list.files(path, pattern = "_sequence.csv", full.names = TRUE)
+data <- files |> set_names() |> map(read_csv, .progress = "Loading in data")
+data <-
+  data |>
+  map({
+    \(x) x |>
+      rename(Datetime = "...1") |>
+      mutate(Datetime =
+               lubridate::ymd_hms(
+                 glue(
+                   "2023-06-16 {
+                  hms::hms(minutes = seq(0, 30*21, by = 30), hours = rep(8, 22))
+             }"
+                 ),tz = tz
+               )) |>
+      pivot_longer(
+        -Datetime,
+        names_to = "Sequence",
+        names_prefix = "seq_",
+        values_to = "MEDI"
+      )
+  }, .progress = "Preparing loaded data")
+
+names(data) <- names(data) |> basename() |> str_remove("_sequence\\.csv")
+```
+
+## Metrics
+
+Metrics to calculate, all based on the calculated values for melanopic EDI (lx):
+
+- $TAT_{250}$ (Time above 250, lx)
+- $TAT_{1000}$ (Time above 1000, lx)
+- $Dose$ (Dose, lx·h)
+- $MLiT_{250}$ (Mean timing of light above 250, HH:MM)
+- $FLiT_{250}$ (First timing of light above 250, HH:MM)
+
+```{r}
+metrics <-
+  data |>
+  map({
+    \(x) x |>
+  # filter(Sequence %in% c("0001", "0002", "0003", "0004")) |> 
+  group_by(Sequence) |> 
+  summarize(
+    dose(MEDI, Datetime, as.df = TRUE),
+    duration_above_threshold(MEDI, Datetime, threshold = 250, as.df = TRUE),
+    duration_above_threshold(MEDI, Datetime, threshold = 1000, as.df = TRUE),
+    timing_above_threshold(MEDI, Datetime, threshold = 250, as.df = TRUE)
+  ) |> 
+  Datetime2Time() |> 
+  summarize(
+    across(dose:last_timing_above_250,
+           .fns = list(mean = ~mean(.x, na.rm = TRUE),
+                       median = ~median(.x, na.rm = TRUE),
+                       sd = ~sd(.x, na.rm = TRUE),
+                       min = ~min(.x, na.rm = TRUE),
+                       max = ~max(.x, na.rm = TRUE),
+                       q25 = ~quantile(.x, 0.25, na.rm = TRUE),
+                       q75 = ~quantile(.x, 0.75, na.rm = TRUE)
+                       ),
+           .names = "{.col}.{.fn}"
+           )
+    ) |> 
+  pivot_longer(
+    cols = everything(),
+    names_to   = c("metric", "stat"),
+    names_sep  = "\\.",
+    values_transform = list(value = as.numeric)  # mix of dbl/duration/POSIXct
+  ) |> 
+  pivot_wider(
+    names_from  = metric,        # columns = metrics
+    values_from = value          # rows = statistics
+  ) |> 
+  mutate(
+    across(-stat, round),
+    across(contains("duration"), as.duration),
+    across(contains("timing"), hms::as_hms)
+    )
+  }, .progress = "Calculating metrics")
+
+metrics |> 
+  imap(\(x, idx) x |> 
+                  gt() |> 
+                  cols_label_with(fn = \(x) x |> 
+                               str_replace_all("_", " ") |> 
+                               str_to_sentence()) |> 
+                  tab_header(idx |> 
+                              str_replace_all("_", " ") |> 
+                               str_to_sentence()
+                             )
+                  
+       )
+
+metrics |> 
+  iwalk(\(x, idx) {
+       write_csv(x, glue("../results/tables/LightLogR/metrics/{idx}.csv"))
+       write_csv(x |> mutate(across(-stat, as.numeric)), 
+                 glue("../results/tables/LightLogR/metrics/{idx}_numeric.csv"))
+    },
+       .progress = "Writing metrics")
+```
+
+## Timeline
+
+### Data
+
+Stats for each time slot from 8:00 until 18:30.
+
+```{r}
+time_stats <-
+  data |>
+  map({
+    \(x) x |>
+  # filter(Sequence %in% c("0001", "0002", "0003", "0004")) |>
+      select(-Sequence) |> 
+  aggregate_Datetime(
+    unit = "30 mins",
+    mean = mean(MEDI, na.rm = TRUE),
+    median = median(MEDI, na.rm = TRUE),
+    sd = sd(MEDI, na.rm = TRUE),
+    min = min(MEDI, na.rm = TRUE),
+    max = max(MEDI, na.rm = TRUE),
+    q25 = quantile(MEDI, 0.25, na.rm = TRUE),
+    q75 = quantile(MEDI, 0.75, na.rm = TRUE),
+    n. = n()
+    ) |> 
+    select(-MEDI) |> 
+      rename(n = n.)
+  }, .progress = "Calculating Timestats")
+
+time_stats |> 
+  imap(\(x, idx) x |> 
+                  gt() |> 
+                  cols_label_with(fn = \(x) x |> 
+                               str_replace_all("_", " ") |> 
+                               str_to_sentence()) |> 
+                  tab_header(idx |> 
+                              str_replace_all("_", " ") |> 
+                               str_to_sentence()
+                             )
+                  
+       )
+
+time_stats |> 
+  iwalk(\(x, idx) {
+       write_csv(x, glue("../results/tables/LightLogR/timeline/{idx}.csv"))
+    },
+       .progress = "Writing timeline")
+
+```
+
+### Plot
+
+```{r}
+caption <- glue("<strong style = 'color:{alpha('#0073C2FF', 
+          alpha = 1)}'>IQR</strong>, <strong style = 'color:{alpha('#0073C2FF', 
+          alpha = 0.25)}'>range</strong>")
+
+time_stats_plot <-
+  time_stats |>
+  imap({
+   \(x, idx) x |> 
+  gg_day(median, geom = "blank",
+         facetting = FALSE,
+         y.axis.label = "melanopic EDI (lx)"
+         ) |> 
+  gg_photoperiod(coordinates) +
+  geom_ribbon(aes(ymin = min, ymax = max), fill = "#0073C2FF", alpha = 0.25) +
+  geom_ribbon(aes(ymin = q25, ymax = q75), fill = "#0073C2FF") +
+  geom_line() +
+  geom_point() +
+      coord_cartesian(ylim = c(0,10^5)) +
+      labs(caption = caption, title = idx |> 
+                                        str_replace_all("_", " ") |> 
+                                        str_to_sentence()) +
+      theme_sub_plot(caption = element_textbox_simple())
+  })
+
+time_stats_plot
+
+time_stats_plot |> 
+  iwalk(\(x, idx) {
+       ggsave(plot = x, glue("../results/plots/LightLogR/Timeline_{idx}.pdf"),
+              height = 4, width = 6)
+    },
+       .progress = "Saving timeline plots")
+
+```
+

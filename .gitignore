@@ -37,3 +37,4 @@ Thumbs.db
 # Ignore IDE/project settings
 .vscode/
 .idea/
+.Rproj.user
