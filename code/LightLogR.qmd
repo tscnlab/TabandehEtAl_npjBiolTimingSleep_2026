@@ -21,7 +21,7 @@ library(LightLogR)
 library(gt)
 library(glue)
 library(ggtext)
-source("https://raw.githubusercontent.com/MeLiDosProject/Data_Metadata_Conventions/main/scripts/overview_plot.R")
+library(legendry)
 tz <- "America/Toronto"
 coordinates <- c(45.449, -75.625)
 ```
@@ -29,6 +29,11 @@ coordinates <- c(45.449, -75.625)
 ## Worldmap
 
 ```{r}
+#| label: worldmap
+#| eval:false
+
+source("https://raw.githubusercontent.com/MeLiDosProject/Data_Metadata_Conventions/main/scripts/overview_plot.R")
+
 grand_overview("", coordinates, "Ottawa", "Canada", "#D80621", panels = "map")
 ggsave("../results/plots/LightLogR/worldmap.pdf", height = 3.4)
 ```
@@ -36,6 +41,7 @@ ggsave("../results/plots/LightLogR/worldmap.pdf", height = 3.4)
 ## Import
 
 ```{r}
+#| label: import
 path <- "../results"
 files <- list.files(path, pattern = "_sequence.csv", full.names = TRUE)
 data <- files |> set_names() |> map(read_csv, .progress = "Loading in data")
@@ -74,6 +80,7 @@ Metrics to calculate, all based on the calculated values for melanopic EDI (lx):
 - $FLiT_{250}$ (First timing of light above 250, HH:MM)
 
 ```{r}
+#| label: calculate metrics
 metrics <-
   data |>
   map({
@@ -146,6 +153,7 @@ metrics |>
 Stats for each time slot from 8:00 until 18:30.
 
 ```{r}
+#| label: calculate timeline stats
 time_stats <-
   data |>
   map({
@@ -191,7 +199,8 @@ time_stats |>
 ### Plot
 
 ```{r}
-caption <- glue("<strong style = 'color:{alpha('#0073C2FF', 
+#| label: create plots
+caption <- glue("<strong>mean</strong>, <strong style = 'color:{alpha('#0073C2FF', 
           alpha = 1)}'>IQR</strong>, <strong style = 'color:{alpha('#0073C2FF', 
           alpha = 0.25)}'>range</strong>")
 
@@ -199,8 +208,10 @@ time_stats_plot <-
   time_stats |>
   imap({
    \(x, idx) x |> 
-  gg_day(median, geom = "blank",
+  gg_day(mean, geom = "blank",
          facetting = FALSE,
+         y.scale = "identity",
+         y.axis.breaks = waiver(),
          y.axis.label = "melanopic EDI (lx)"
          ) |> 
   gg_photoperiod(coordinates) +
@@ -208,7 +219,7 @@ time_stats_plot <-
   geom_ribbon(aes(ymin = q25, ymax = q75), fill = "#0073C2FF") +
   geom_line() +
   geom_point() +
-      coord_cartesian(ylim = c(0,10^5)) +
+      coord_cartesian(ylim = c(0,10^4*2.5)) +
       labs(caption = caption, title = idx |> 
                                         str_replace_all("_", " ") |> 
                                         str_to_sentence()) +
