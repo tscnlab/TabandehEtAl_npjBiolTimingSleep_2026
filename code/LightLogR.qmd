@@ -210,16 +210,17 @@ time_stats_plot <-
    \(x, idx) x |> 
   gg_day(mean, geom = "blank",
          facetting = FALSE,
-         y.scale = "identity",
-         y.axis.breaks = waiver(),
          y.axis.label = "melanopic EDI (lx)"
          ) |> 
   gg_photoperiod(coordinates) +
   geom_ribbon(aes(ymin = min, ymax = max), fill = "#0073C2FF", alpha = 0.25) +
   geom_ribbon(aes(ymin = q25, ymax = q75), fill = "#0073C2FF") +
   geom_line() +
+  scale_y_continuous(trans = "symlog", 
+                     labels = expression(0,10^0,10^1, 10^2, 10^3, 10^4, 10^5),
+                     breaks = c(0, 10^0:5)) +
   geom_point() +
-      coord_cartesian(ylim = c(0,10^4*2.5)) +
+      coord_cartesian(ylim = c(1,10^5)) +
       labs(caption = caption, title = idx |> 
                                         str_replace_all("_", " ") |> 
                                         str_to_sentence()) +
