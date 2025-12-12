@@ -4,23 +4,23 @@ TabandehEtAl_npjBiolTimingSleep_2026/
     ├── environment.yml
     └── renv.lock
 code/
+    ├── LightLogR.html
     ├── LightLogR.qmd
     └── trajectory.ipynb
 data/
-    ├── jeti_metadata_summary_tidy_scenes.csv
     └── metadata_jeti_scenes.csv
 renv/
     ├── activate.R
     └── settings.json
 results/
-    ├── activity_restricted_melanopic_sequence.csv
     ├── datatree.txt
+    ├── location_restricted_melanopic_sequence.csv
     ├── naive_indoor_melanopic_sequence.csv
     ├── naive_melanopic_sequence.csv
     ├── naive_outdoor_melanopic_sequence.csv
     ├── pivot_photopic_melanopic_trajectory_canada.csv
     ├── pivot_summary_trajectory_canada.csv
-    ├── time_activity_restricted_melanopic_sequence.csv
+    ├── time_location_restricted_melanopic_sequence.csv
     └── time_restricted_melanopic_sequence.csv
 │   plots/
 │       ├── MonteCarlo_stability_naive.pdf
@@ -36,24 +36,32 @@ results/
 │       ├── photopic_illuminance_trajectory_days.pdf
 │       └── photopic_illuminance_trajectory_days.png
 │   │   LightLogR/
+│   │       ├── Timeline_location_restricted_melanopic.pdf
 │   │       ├── Timeline_naive_indoor_melanopic.pdf
 │   │       ├── Timeline_naive_melanopic.pdf
 │   │       ├── Timeline_naive_outdoor_melanopic.pdf
+│   │       ├── Timeline_time_location_restricted_melanopic.pdf
 │   │       ├── Timeline_time_restricted_melanopic.pdf
 │   │       └── worldmap.pdf
 │   tables/
 │   │   LightLogR/
 │   │   │   metrics/
+│   │   │       ├── location_restricted_melanopic.csv
+│   │   │       ├── location_restricted_melanopic_numeric.csv
 │   │   │       ├── naive_indoor_melanopic.csv
 │   │   │       ├── naive_indoor_melanopic_numeric.csv
 │   │   │       ├── naive_melanopic.csv
 │   │   │       ├── naive_melanopic_numeric.csv
 │   │   │       ├── naive_outdoor_melanopic.csv
 │   │   │       ├── naive_outdoor_melanopic_numeric.csv
+│   │   │       ├── time_location_restricted_melanopic.csv
+│   │   │       ├── time_location_restricted_melanopic_numeric.csv
 │   │   │       ├── time_restricted_melanopic.csv
 │   │   │       └── time_restricted_melanopic_numeric.csv
 │   │   │   timeline/
+│   │   │       ├── location_restricted_melanopic.csv
 │   │   │       ├── naive_indoor_melanopic.csv
 │   │   │       ├── naive_melanopic.csv
 │   │   │       ├── naive_outdoor_melanopic.csv
+│   │   │       ├── time_location_restricted_melanopic.csv
 │   │   │       └── time_restricted_melanopic.csv
