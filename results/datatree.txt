@@ -8,6 +8,7 @@ code/
     ├── LightLogR.qmd
     └── trajectory.ipynb
 data/
+    ├── hourly.csv
     └── metadata_jeti_scenes.csv
 renv/
     ├── activate.R
