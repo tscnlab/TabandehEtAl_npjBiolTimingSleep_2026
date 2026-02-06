@@ -8,30 +8,18 @@ code/
     ├── LightLogR.qmd
     └── trajectory.ipynb
 data/
+    ├── 20230614RoofBox1min.csv
+    ├── 20230616RoofBox1min.csv
+    ├── 20230619RoofBox1min.csv
     ├── metadata_jeti_scenes.csv
     └── real_world_dataset.csv
 renv/
     ├── activate.R
     └── settings.json
 results/
-    ├── datatree.txt
-    ├── location_restricted_melanopic_sequence.csv
-    ├── naive_indoor_melanopic_sequence.csv
-    ├── naive_melanopic_sequence.csv
-    ├── naive_outdoor_melanopic_sequence.csv
     ├── pivot_photopic_melanopic_trajectory_canada.csv
-    ├── pivot_summary_trajectory_canada.csv
-    ├── time_location_restricted_melanopic_sequence.csv
-    └── time_restricted_melanopic_sequence.csv
+    └── pivot_summary_trajectory_canada.csv
 │   plots/
-│       ├── MonteCarlo_stability_naive.pdf
-│       ├── MonteCarlo_stability_naive.png
-│       ├── MonteCarlo_stability_naive_indoor.pdf
-│       ├── MonteCarlo_stability_naive_indoor.png
-│       ├── MonteCarlo_stability_naive_outdoor.pdf
-│       ├── MonteCarlo_stability_naive_outdoor.png
-│       ├── MonteCarlo_stability_time_restricted.pdf
-│       ├── MonteCarlo_stability_time_restricted.png
 │       ├── melanopic_trajectory_days.pdf
 │       ├── melanopic_trajectory_days.png
 │       ├── photopic_illuminance_trajectory_days.pdf

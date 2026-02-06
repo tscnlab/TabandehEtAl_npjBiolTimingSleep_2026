@@ -1,4 +1,4 @@
-time,Photopic illuminance (lux),Photopic illuminance (lux),Photopic illuminance (lux),Melanopic-EDI (lux),Melanopic-EDI (lux),Melanopic-EDI (lux)
+time,Photopic illuminance (lx),Photopic illuminance (lx),Photopic illuminance (lx),Melanopic EDI (lx),Melanopic EDI (lx),Melanopic EDI (lx)
 ,2023-06-14,2023-06-16,2023-06-19,2023-06-14,2023-06-16,2023-06-19
 08:00:00,36.1,37.3,43.8,19.0,20.4,23.0
 08:30:00,130.2,110.0,114.1,92.0,70.8,81.1
