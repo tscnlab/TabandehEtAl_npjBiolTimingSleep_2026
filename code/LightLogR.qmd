@@ -42,7 +42,7 @@ ggsave("../results/plots/LightLogR/worldmap.pdf", height = 3.4)
 
 ```{r}
 #| label: import
-path <- "../results"
+path <- "../results/tables"
 files <- list.files(path, pattern = "_sequence.csv", full.names = TRUE)
 data <- files |> set_names() |> map(read_csv, .progress = "Loading in data")
 data <-
@@ -81,21 +81,25 @@ Metrics to calculate, all based on the calculated values for melanopic EDI (lx):
 
 ```{r}
 #| label: calculate metrics
-metrics <-
+metrics_raw <-
   data |>
   map({
     \(x) x |>
-  # filter(Sequence %in% c("0001", "0002", "0003", "0004")) |> 
   group_by(Sequence) |> 
   summarize(
     dose(MEDI, Datetime, as.df = TRUE),
     duration_above_threshold(MEDI, Datetime, threshold = 250, as.df = TRUE),
     duration_above_threshold(MEDI, Datetime, threshold = 1000, as.df = TRUE),
-    timing_above_threshold(MEDI, Datetime, threshold = 250, as.df = TRUE)
-  ) |> 
-  Datetime2Time() |> 
+    duration_above_threshold(MEDI, Datetime, threshold = 10000, as.df = TRUE),
+  )
+  }, .progress = "Calculating metrics")
+
+metrics <-
+  metrics_raw |>
+  map({
+    \(x) x |>
   summarize(
-    across(dose:last_timing_above_250,
+    across(dose:duration_above_10000,
            .fns = list(mean = ~mean(.x, na.rm = TRUE),
                        median = ~median(.x, na.rm = TRUE),
                        sd = ~sd(.x, na.rm = TRUE),
@@ -106,17 +110,17 @@ metrics <-
                        ),
            .names = "{.col}.{.fn}"
            )
-    ) |> 
+    ) |>
   pivot_longer(
     cols = everything(),
     names_to   = c("metric", "stat"),
     names_sep  = "\\.",
     values_transform = list(value = as.numeric)  # mix of dbl/duration/POSIXct
-  ) |> 
+  ) |>
   pivot_wider(
     names_from  = metric,        # columns = metrics
     values_from = value          # rows = statistics
-  ) |> 
+  ) |>
   mutate(
     across(-stat, round),
     across(contains("duration"), as.duration),
@@ -136,6 +140,14 @@ metrics |>
                              )
                   
        )
+
+metrics_raw |> 
+  iwalk(\(x, idx) {
+       write_csv(x, glue("../results/tables/LightLogR/metrics_raw/{idx}.csv"))
+       write_csv(x |> mutate(across(-Sequence, as.numeric)), 
+                 glue("../results/tables/LightLogR/metrics_raw/{idx}_numeric.csv"))
+    },
+       .progress = "Writing metrics")
 
 metrics |> 
   iwalk(\(x, idx) {
@@ -218,7 +230,7 @@ time_stats_plot <-
   geom_line() +
   scale_y_continuous(trans = "symlog", 
                      labels = expression(0,10^0,10^1, 10^2, 10^3, 10^4, 10^5),
-                     breaks = c(0, 10^0:5)) +
+                     breaks = c(0, 10^(0:5))) +
   geom_point() +
       coord_cartesian(ylim = c(1,10^5)) +
       labs(caption = caption, title = idx |> 

@@ -1,8 +1,8 @@
-stat,dose,duration_above_250,duration_above_1000,mean_timing_above_250,first_timing_above_250,last_timing_above_250
-mean,46707,23259s (~6.46 hours),18871s (~5.24 hours),13:14:40,08:20:52,18:08:40
-median,45559,23400s (~6.5 hours),18000s (~5 hours),13:15:00,08:00:00,18:30:00
-sd,14268,4154s (~1.15 hours),4207s (~1.17 hours),00:36:13,00:32:38,00:33:03
-min,4986,5400s (~1.5 hours),1800s (~30 minutes),09:55:43,08:00:00,12:30:00
-max,131080,39600s (~11 hours),36000s (~10 hours),16:00:00,13:30:00,18:30:00
-q25,36601,19800s (~5.5 hours),16200s (~4.5 hours),12:51:11,08:00:00,18:00:00
-q75,55671,25200s (~7 hours),21600s (~6 hours),13:38:00,08:30:00,18:30:00
+stat,dose,duration_above_250,duration_above_1000,duration_above_10000
+mean,46707,23259s (~6.46 hours),18871s (~5.24 hours),6933s (~1.93 hours)
+median,45559,23400s (~6.5 hours),18000s (~5 hours),7200s (~2 hours)
+sd,14268,4154s (~1.15 hours),4207s (~1.17 hours),3211s (~53.52 minutes)
+min,4986,5400s (~1.5 hours),1800s (~30 minutes),0s
+max,131080,39600s (~11 hours),36000s (~10 hours),23400s (~6.5 hours)
+q25,36601,19800s (~5.5 hours),16200s (~4.5 hours),5400s (~1.5 hours)
+q75,55671,25200s (~7 hours),21600s (~6 hours),9000s (~2.5 hours)
