@@ -12,18 +12,66 @@ data/
     ├── 20230616RoofBox1min.csv
     ├── 20230619RoofBox1min.csv
     ├── metadata_jeti_scenes.csv
-    └── real_world_dataset.csv
+    ├── real_world_dataset.csv
+    └── tailored_trajectory_sequences.xlsx
 renv/
     ├── activate.R
     └── settings.json
 results/
-    ├── pivot_photopic_melanopic_trajectory_canada.csv
-    └── pivot_summary_trajectory_canada.csv
+    └── datatree.txt
 │   plots/
+│       ├── Combined_location_restricted.pdf
+│       ├── Combined_location_restricted.png
+│       ├── Combined_naive.pdf
+│       ├── Combined_naive.png
+│       ├── Combined_naive_indoor.pdf
+│       ├── Combined_naive_indoor.png
+│       ├── Combined_naive_outdoor.pdf
+│       ├── Combined_naive_outdoor.png
+│       ├── Combined_time_location_restricted.pdf
+│       ├── Combined_time_location_restricted.png
+│       ├── Combined_time_restricted.pdf
+│       ├── Combined_time_restricted.png
+│       ├── Distribution_location_restricted.pdf
+│       ├── Distribution_location_restricted.png
+│       ├── Distribution_naive.pdf
+│       ├── Distribution_naive.png
+│       ├── Distribution_naive_indoor.pdf
+│       ├── Distribution_naive_indoor.png
+│       ├── Distribution_naive_outdoor.pdf
+│       ├── Distribution_naive_outdoor.png
+│       ├── Distribution_time_location_restricted.pdf
+│       ├── Distribution_time_location_restricted.png
+│       ├── Distribution_time_restricted.pdf
+│       ├── Distribution_time_restricted.png
+│       ├── Metrics_location_restricted.pdf
+│       ├── Metrics_location_restricted.png
+│       ├── Metrics_naive.pdf
+│       ├── Metrics_naive.png
+│       ├── Metrics_naive_indoor.pdf
+│       ├── Metrics_naive_indoor.png
+│       ├── Metrics_naive_outdoor.pdf
+│       ├── Metrics_naive_outdoor.png
+│       ├── Metrics_time_location_restricted.pdf
+│       ├── Metrics_time_location_restricted.png
+│       ├── Metrics_time_restricted.pdf
+│       ├── Metrics_time_restricted.png
+│       ├── Models_distribution_grid.pdf
+│       ├── Models_distribution_grid.png
+│       ├── MonteCarlo_stability_heatmap_naive_model_monte_carlo_convergence.pdf
+│       ├── MonteCarlo_stability_heatmap_naive_model_monte_carlo_convergence.png
+│       ├── Violin_plot_mean_melanopic_distribution.pdf
+│       ├── Violin_plot_mean_melanopic_distribution.png
 │       ├── melanopic_trajectory_days.pdf
 │       ├── melanopic_trajectory_days.png
-│       ├── photopic_illuminance_trajectory_days.pdf
-│       └── photopic_illuminance_trajectory_days.png
+│       ├── photopic_trajectory_days.pdf
+│       ├── photopic_trajectory_days.png
+│       ├── placeholders_diagram.pdf
+│       ├── placeholders_diagram.png
+│       ├── plot_photopic_melanopic.pdf
+│       ├── plot_photopic_melanopic.png
+│       ├── tailored_model.pdf
+│       └── tailored_model.png
 │   │   LightLogR/
 │   │       ├── Timeline_location_restricted_melanopic.pdf
 │   │       ├── Timeline_naive_indoor_melanopic.pdf
@@ -33,8 +81,37 @@ results/
 │   │       ├── Timeline_time_restricted_melanopic.pdf
 │   │       └── worldmap.pdf
 │   tables/
+│       ├── pivot_melanopic_metadata_trajectory_canada.csv
+│       ├── pivot_photopic_melanopic_trajectory_canada.csv
+│       └── pivot_summary_trajectory_canada.csv
 │   │   LightLogR/
 │   │   │   metrics/
+│   │   │       ├── location_restricted_melanopic.csv
+│   │   │       ├── location_restricted_melanopic_numeric.csv
+│   │   │       ├── naive_indoor_melanopic.csv
+│   │   │       ├── naive_indoor_melanopic_numeric.csv
+│   │   │       ├── naive_melanopic.csv
+│   │   │       ├── naive_melanopic_numeric.csv
+│   │   │       ├── naive_outdoor_melanopic.csv
+│   │   │       ├── naive_outdoor_melanopic_numeric.csv
+│   │   │       ├── time_location_restricted_melanopic.csv
+│   │   │       ├── time_location_restricted_melanopic_numeric.csv
+│   │   │       ├── time_restricted_melanopic.csv
+│   │   │       └── time_restricted_melanopic_numeric.csv
+│   │   │   metrics_old/
+│   │   │       ├── location_restricted_melanopic.csv
+│   │   │       ├── location_restricted_melanopic_numeric.csv
+│   │   │       ├── naive_indoor_melanopic.csv
+│   │   │       ├── naive_indoor_melanopic_numeric.csv
+│   │   │       ├── naive_melanopic.csv
+│   │   │       ├── naive_melanopic_numeric.csv
+│   │   │       ├── naive_outdoor_melanopic.csv
+│   │   │       ├── naive_outdoor_melanopic_numeric.csv
+│   │   │       ├── time_location_restricted_melanopic.csv
+│   │   │       ├── time_location_restricted_melanopic_numeric.csv
+│   │   │       ├── time_restricted_melanopic.csv
+│   │   │       └── time_restricted_melanopic_numeric.csv
+│   │   │   metrics_raw/
 │   │   │       ├── location_restricted_melanopic.csv
 │   │   │       ├── location_restricted_melanopic_numeric.csv
 │   │   │       ├── naive_indoor_melanopic.csv
@@ -54,3 +131,10 @@ results/
 │   │   │       ├── naive_outdoor_melanopic.csv
 │   │   │       ├── time_location_restricted_melanopic.csv
 │   │   │       └── time_restricted_melanopic.csv
+│   │   sequences/
+│   │       ├── location_restricted_melanopic_sequence.csv
+│   │       ├── naive_indoor_melanopic_sequence.csv
+│   │       ├── naive_melanopic_sequence.csv
+│   │       ├── naive_outdoor_melanopic_sequence.csv
+│   │       ├── time_location_restricted_melanopic_sequence.csv
+│   │       └── time_restricted_melanopic_sequence.csv
