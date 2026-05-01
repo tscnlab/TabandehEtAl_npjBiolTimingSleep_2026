@@ -32,6 +32,8 @@ results/
 │       ├── Combined_time_location_restricted.png
 │       ├── Combined_time_restricted.pdf
 │       ├── Combined_time_restricted.png
+│       ├── Comparison_violin_plot_mean_melanopic_distribution.pdf
+│       ├── Comparison_violin_plot_mean_melanopic_distribution.png
 │       ├── Distribution_location_restricted.pdf
 │       ├── Distribution_location_restricted.png
 │       ├── Distribution_naive.pdf
@@ -58,10 +60,8 @@ results/
 │       ├── Metrics_time_restricted.png
 │       ├── Models_distribution_grid.pdf
 │       ├── Models_distribution_grid.png
-│       ├── MonteCarlo_stability_heatmap_naive_model_monte_carlo_convergence.pdf
-│       ├── MonteCarlo_stability_heatmap_naive_model_monte_carlo_convergence.png
-│       ├── Violin_plot_mean_melanopic_distribution.pdf
-│       ├── Violin_plot_mean_melanopic_distribution.png
+│       ├── MonteCarlo_convergence_heatmap_naive_model.pdf
+│       ├── MonteCarlo_convergence_heatmap_naive_model.png
 │       ├── melanopic_trajectory_days.pdf
 │       ├── melanopic_trajectory_days.png
 │       ├── photopic_trajectory_days.pdf
@@ -70,8 +70,14 @@ results/
 │       ├── placeholders_diagram.png
 │       ├── plot_photopic_melanopic.pdf
 │       ├── plot_photopic_melanopic.png
+│       ├── plot_tailored_analysis.pdf
+│       ├── plot_tailored_analysis.png
 │       ├── tailored_model.pdf
-│       └── tailored_model.png
+│       ├── tailored_model.png
+│       ├── tailored_model_dose_plot.pdf
+│       ├── tailored_model_dose_plot.png
+│       ├── tailored_model_effect_plot.pdf
+│       └── tailored_model_effect_plot.png
 │   │   LightLogR/
 │   │       ├── Timeline_location_restricted_melanopic.pdf
 │   │       ├── Timeline_naive_indoor_melanopic.pdf
