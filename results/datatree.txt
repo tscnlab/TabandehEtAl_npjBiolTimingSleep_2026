@@ -70,8 +70,14 @@ results/
 │       ├── placeholders_diagram.png
 │       ├── plot_photopic_melanopic.pdf
 │       ├── plot_photopic_melanopic.png
+│       ├── plot_real_world.pdf
+│       ├── plot_real_world.png
 │       ├── plot_tailored_analysis.pdf
 │       ├── plot_tailored_analysis.png
+│       ├── real_world_hist.pdf
+│       ├── real_world_hist.png
+│       ├── real_world_violin_plot_mean_melanopic_distribution.pdf
+│       ├── real_world_violin_plot_mean_melanopic_distribution.png
 │       ├── tailored_model.pdf
 │       ├── tailored_model.png
 │       ├── tailored_model_dose_plot.pdf
