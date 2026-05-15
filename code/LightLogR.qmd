@@ -22,6 +22,12 @@ library(gt)
 library(glue)
 library(ggtext)
 library(legendry)
+library(here)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(melidosData)
+library(ggrepel)
+library(patchwork)
 tz <- "America/Toronto"
 coordinates <- c(45.449, -75.625)
 ```
@@ -29,13 +35,144 @@ coordinates <- c(45.449, -75.625)
 ## Worldmap
 
 ```{r}
+# source("https://raw.githubusercontent.com/MeLiDosProject/Data_Metadata_Conventions/main/scripts/overview_plot.R")
+```
+
+```{r}
+colors_plot <- c(
+melidos_colors[c("IZTECH", "FUSPCEU", "MPI", "KNUST", "UCR")],
+ML = "#0073C2FF",
+CH = "#EFC000FF",
+CA = "#D80621",
+UK = "blue"
+)
+
+countries <- c(
+  melidos_countries[c("IZTECH", "FUSPCEU", "MPI", "KNUST", "UCR")],
+  ML = "Malaysia",
+  CH = "Switzerland",
+  CA = "Canada",
+  UK = "United Kindgom"
+  )
+
+locations <- c(
+  melidos_cities[c("IZTECH", "FUSPCEU", "MPI", "KNUST", "UCR")],
+  ML = "Kuala Lumpur",
+  CH = "Basel",
+  CA = "Ottawa",
+  UK = "Manchester"
+)
+
+lats <- c(
+  melidos_coordinates[c("IZTECH", "FUSPCEU", "MPI", "KNUST", "UCR")] |> map(1) |> unlist(),
+  ML = 3.0650,
+  CH = 47.5585,
+  CA = coordinates[1],
+  UK = 53.47
+)
+lons <- c(
+  melidos_coordinates[c("IZTECH", "FUSPCEU", "MPI", "KNUST", "UCR")] |> map(2) |> unlist(),
+  ML = 101.6009,
+  CH = 7.5839,
+  CA = coordinates[2],
+  UK = -2.23
+)
+```
+
+
+```{r}
+world <- ne_countries(scale = "medium", returnclass = "sf")
+    
+    countries_colors <- tibble(
+      country = countries,
+      color   = colors_plot,
+      stringsAsFactors = FALSE
+    )
+    
+    world$color <- ifelse(
+      world$name %in% countries_colors$country,
+      countries_colors$country[match(world$name, countries_colors$country)],
+      NA
+    )
+    
+    # 3) Locations in geographic CRS (EPSG:4326)
+    location_info <- tibble(
+      country  = countries,
+      location = locations,
+      lat      = lats,
+      lon      = lons,
+      color    = colors_plot,
+      stringsAsFactors = FALSE
+    ) |> 
+      rowwise() |> 
+      mutate(
+        coordinate_string = format_coordinates(c(lat,lon)),
+        label = 
+          paste0(location, ", ", country, " (", coordinate_string, ")")
+        )
+    
+    locations <- st_as_sf(location_info, coords = c("lon", "lat"), crs = 4326)
+    
+    # 4) Project both layers to a planar CRS
+    # robinson_crs <- paste0("+proj=", map_projection)
+    robinson_crs <- "+proj=eqc"
+    world_proj     <- st_transform(world,    crs = robinson_crs)
+    locations_proj <- st_transform(locations, crs = robinson_crs)
+    
+    bb <- st_bbox(world_proj)
+    y_offset <- 0.08 * (bb["ymax"] - bb["ymin"]) 
+    
+    # 5) Plot
+```
+
+
+```{r}
+#| fig-width: 10
+#| fig-height: 5
+ggplot() +
+      geom_sf(data = world_proj, aes(fill = color),
+              color = NA, size = 0.25, alpha = 0.5, show.legend = FALSE) +
+      geom_sf(data = locations_proj, aes(fill = country),
+              shape = 21, color = "black", size = 3, stroke = 0.2) +
+      geom_label_repel(
+        data = locations_proj,
+        stat = "sf_coordinates",
+        label.size = 0,
+        aes(label = label, fill = country, geometry = geometry),
+        color = c(rep("black", 7),  "white", "white"),
+        min.segment.length = 0.75,
+        size = 3,
+        alpha = 0.8,
+        box.padding = 0.5,    # space between labels
+        max.overlaps = 20,
+        point.padding = 0.25,  # space from point to label
+        force = 5,             # stronger repulsion
+        force_pull = 0.25,      # weaker pull back to point
+        seed = 123
+      ) +
+      scale_fill_manual(values = 
+                          locations_proj |> 
+                          as_tibble() |> 
+                          select(country, color) |> 
+                          deframe()) +
+      theme_cowplot() +
+      theme(legend.position = "none") +
+      theme_sub_axis(line = element_blank()) +
+      labs(x = NULL, y = NULL) +
+      coord_sf(expand = FALSE, clip = "off") +
+  theme_sub_plot(margin = margin(5, 12, 5, 5))
+```
+
+
+```{r}
+ggsave(here("results/plots/LightLogR/worldmap.pdf"), width = 10, height = 5)
+```
+
+```{r}
 #| label: worldmap
 #| eval:false
-
-source("https://raw.githubusercontent.com/MeLiDosProject/Data_Metadata_Conventions/main/scripts/overview_plot.R")
-
 grand_overview("", coordinates, "Ottawa", "Canada", "#D80621", panels = "map")
-ggsave("../results/plots/LightLogR/worldmap.pdf", height = 3.4)
+ggsave("../results/plots/LightLogR/worldmap.pdf", height = 5, width = 10)
 ```
 
 ## Import
