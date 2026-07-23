@@ -1,8 +1,0 @@
-stat,dose,duration_above_250,duration_above_1000,duration_above_10000
-mean,48320,23697s (~6.58 hours),19493s (~5.41 hours),7466s (~2.07 hours)
-median,47189,23400s (~6.5 hours),19800s (~5.5 hours),7200s (~2 hours)
-sd,10635,2773s (~46.22 minutes),3020s (~50.33 minutes),2113s (~35.22 minutes)
-min,12344,14400s (~4 hours),10800s (~3 hours),0s
-max,92866,34200s (~9.5 hours),34200s (~9.5 hours),14400s (~4 hours)
-q25,40502,21600s (~6 hours),18000s (~5 hours),5400s (~1.5 hours)
-q75,55281,25200s (~7 hours),21600s (~6 hours),9000s (~2.5 hours)
