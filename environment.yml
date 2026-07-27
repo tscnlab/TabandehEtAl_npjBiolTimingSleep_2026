@@ -2,10 +2,14 @@ name: trajectory_env
 channels:
   - conda-forge
 dependencies:
-  - pandas
-  - matplotlib
-  - jupyter
-  - numpy
-  - python
-  - scikit-learn
-
+  - python=3.14
+  - pandas=3.0
+  - matplotlib=3.11
+  - jupyter=1.1
+  - numpy=2.5
+  - scikit-learn=1.9
+  - cmcrameri=1.9
+  - scipy=1.18
+  - pillow=12.3
+  - ipython=9.15
+  - openpyxl=3.1

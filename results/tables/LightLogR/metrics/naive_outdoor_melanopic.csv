@@ -1,8 +1,0 @@
-stat,dose,duration_above_250,duration_above_1000,duration_above_10000
-mean,120931,39600s (~11 hours),39600s (~11 hours),24192s (~6.72 hours)
-median,119995,39600s (~11 hours),39600s (~11 hours),23400s (~6.5 hours)
-sd,16446,0s,0s,4113s (~1.14 hours)
-min,50993,39600s (~11 hours),39600s (~11 hours),3600s (~1 hours)
-max,221863,39600s (~11 hours),39600s (~11 hours),39600s (~11 hours)
-q25,109363,39600s (~11 hours),39600s (~11 hours),21600s (~6 hours)
-q75,131438,39600s (~11 hours),39600s (~11 hours),27000s (~7.5 hours)
