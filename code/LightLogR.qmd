@@ -23,11 +23,13 @@ library(glue)
 library(ggtext)
 library(legendry)
 library(here)
+library(cowplot)
 library(rnaturalearth)
 library(rnaturalearthdata)
 library(melidosData)
 library(ggrepel)
 library(patchwork)
+library(sf)
 tz <- "America/Toronto"
 coordinates <- c(45.449, -75.625)
 ```
@@ -39,12 +41,23 @@ coordinates <- c(45.449, -75.625)
 ```
 
 ```{r}
+# colors_plot <- c(
+# melidos_colors[c("IZTECH", "FUSPCEU", "MPI", "KNUST", "UCR")],
+# ML = "#0073C2FF",
+# CH = "#EFC000FF",
+# CA = "#D80621",
+# UK = "blue"
+# )
 colors_plot <- c(
-melidos_colors[c("IZTECH", "FUSPCEU", "MPI", "KNUST", "UCR")],
-ML = "#0073C2FF",
-CH = "#EFC000FF",
+IZTECH = "skyblue", 
+FUSPCEU = "skyblue", 
+MPI = "skyblue", 
+KNUST = "skyblue", 
+UCR = "skyblue",
+ML = "skyblue",
+CH = "skyblue",
 CA = "#D80621",
-UK = "blue"
+UK = "skyblue"
 )
 
 countries <- c(
@@ -52,7 +65,7 @@ countries <- c(
   ML = "Malaysia",
   CH = "Switzerland",
   CA = "Canada",
-  UK = "United Kindgom"
+  UK = "United Kingdom"
   )
 
 locations <- c(
@@ -108,7 +121,8 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
       mutate(
         coordinate_string = format_coordinates(c(lat,lon)),
         label = 
-          paste0(location, ", ", country, " (", coordinate_string, ")")
+          # paste0(location, ", ", country, " (", coordinate_string, ")")
+          paste0(country, " (", coordinate_string, ")")
         )
     
     locations <- st_as_sf(location_info, coords = c("lon", "lat"), crs = 4326)
@@ -139,14 +153,14 @@ ggplot() +
         stat = "sf_coordinates",
         label.size = 0,
         aes(label = label, fill = country, geometry = geometry),
-        color = c(rep("black", 7),  "white", "white"),
+        # color = c(rep("black", 7),  "white", "white"),
         min.segment.length = 0.75,
         size = 3,
         alpha = 0.8,
-        box.padding = 0.5,    # space between labels
+        box.padding = 0.25,    # space between labels
         max.overlaps = 20,
         point.padding = 0.25,  # space from point to label
-        force = 5,             # stronger repulsion
+        force = 15,             # stronger repulsion
         force_pull = 0.25,      # weaker pull back to point
         seed = 123
       ) +
@@ -166,6 +180,7 @@ ggplot() +
 
 ```{r}
 ggsave(here("results/plots/LightLogR/worldmap.pdf"), width = 10, height = 5)
+ggsave(here("results/plots/LightLogR/worldmap.png"), width = 10, height = 5)
 ```
 
 ```{r}
