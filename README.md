@@ -13,10 +13,7 @@
      ├── 📄 20230614RoofBox1min.csv               # Downwelling data 20230614
      ├── 📄 20230616RoofBox1min.csv               # Downwelling data 20230616
      ├── 📄 20230619RoofBox1min.csv               # Downwelling data 20230619
-     ├── 📄 trajectory_framework.pdf              # Figure one
-     ├── 📄 trajectory_framework.png              # Figure one
-     ├── 📄 metadata_jeti_scenes.csv              # Measurement day's metadata
-     ├── 📄 real_world_dataset.csv                # MeLidos real-world dataset
+     ├── 📄 metadata_jeti_scenes.csv              # Data and metadata 
      └── 📄 tailored_trajectory_sequences.xlsx    # Tailored scenarios sequences
  📁 renv/
      ├── 📄 activate.R
