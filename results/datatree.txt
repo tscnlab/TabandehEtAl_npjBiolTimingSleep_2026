@@ -20,48 +20,48 @@ renv/
 results/
     └── datatree.txt
 │   plots/
-│       ├── Combined_location_restricted.pdf
-│       ├── Combined_location_restricted.png
-│       ├── Combined_naive.pdf
-│       ├── Combined_naive.png
-│       ├── Combined_naive_indoor.pdf
-│       ├── Combined_naive_indoor.png
-│       ├── Combined_naive_outdoor.pdf
-│       ├── Combined_naive_outdoor.png
-│       ├── Combined_time_location_restricted.pdf
-│       ├── Combined_time_location_restricted.png
-│       ├── Combined_time_restricted.pdf
-│       ├── Combined_time_restricted.png
+│       ├── Combined_activity_block_matched.pdf
+│       ├── Combined_activity_block_matched.png
+│       ├── Combined_broad_context_matched.pdf
+│       ├── Combined_broad_context_matched.png
+│       ├── Combined_exact_slot_matched.pdf
+│       ├── Combined_exact_slot_matched.png
+│       ├── Combined_indoor_only_bound.pdf
+│       ├── Combined_indoor_only_bound.png
+│       ├── Combined_outdoor_only_bound.pdf
+│       ├── Combined_outdoor_only_bound.png
+│       ├── Combined_unrestricted_pooled.pdf
+│       ├── Combined_unrestricted_pooled.png
 │       ├── Comparison_violin_plot_mean_melanopic_distribution.pdf
 │       ├── Comparison_violin_plot_mean_melanopic_distribution.png
-│       ├── Distribution_location_restricted.pdf
-│       ├── Distribution_location_restricted.png
-│       ├── Distribution_naive.pdf
-│       ├── Distribution_naive.png
-│       ├── Distribution_naive_indoor.pdf
-│       ├── Distribution_naive_indoor.png
-│       ├── Distribution_naive_outdoor.pdf
-│       ├── Distribution_naive_outdoor.png
-│       ├── Distribution_time_location_restricted.pdf
-│       ├── Distribution_time_location_restricted.png
-│       ├── Distribution_time_restricted.pdf
-│       ├── Distribution_time_restricted.png
-│       ├── Metrics_location_restricted.pdf
-│       ├── Metrics_location_restricted.png
-│       ├── Metrics_naive.pdf
-│       ├── Metrics_naive.png
-│       ├── Metrics_naive_indoor.pdf
-│       ├── Metrics_naive_indoor.png
-│       ├── Metrics_naive_outdoor.pdf
-│       ├── Metrics_naive_outdoor.png
-│       ├── Metrics_time_location_restricted.pdf
-│       ├── Metrics_time_location_restricted.png
-│       ├── Metrics_time_restricted.pdf
-│       ├── Metrics_time_restricted.png
+│       ├── Distribution_activity_block_matched.pdf
+│       ├── Distribution_activity_block_matched.png
+│       ├── Distribution_broad_context_matched.pdf
+│       ├── Distribution_broad_context_matched.png
+│       ├── Distribution_exact_slot_matched.pdf
+│       ├── Distribution_exact_slot_matched.png
+│       ├── Distribution_indoor_only_bound.pdf
+│       ├── Distribution_indoor_only_bound.png
+│       ├── Distribution_outdoor_only_bound.pdf
+│       ├── Distribution_outdoor_only_bound.png
+│       ├── Distribution_unrestricted_pooled.pdf
+│       ├── Distribution_unrestricted_pooled.png
+│       ├── Metrics_activity_block_matched.pdf
+│       ├── Metrics_activity_block_matched.png
+│       ├── Metrics_broad_context_matched.pdf
+│       ├── Metrics_broad_context_matched.png
+│       ├── Metrics_exact_slot_matched.pdf
+│       ├── Metrics_exact_slot_matched.png
+│       ├── Metrics_indoor_only_bound.pdf
+│       ├── Metrics_indoor_only_bound.png
+│       ├── Metrics_outdoor_only_bound.pdf
+│       ├── Metrics_outdoor_only_bound.png
+│       ├── Metrics_unrestricted_pooled.pdf
+│       ├── Metrics_unrestricted_pooled.png
 │       ├── Models_distribution_grid.pdf
 │       ├── Models_distribution_grid.png
-│       ├── MonteCarlo_convergence_heatmap_naive_model.pdf
-│       ├── MonteCarlo_convergence_heatmap_naive_model.png
+│       ├── MonteCarlo_convergence_heatmap_unrestricted_pooled.pdf
+│       ├── MonteCarlo_convergence_heatmap_unrestricted_pooled.png
 │       ├── melanopic_trajectory_days.pdf
 │       ├── melanopic_trajectory_days.png
 │       ├── photopic_trajectory_days.pdf
@@ -70,52 +70,36 @@ results/
 │       ├── placeholders_diagram.png
 │       ├── plot_photopic_melanopic.pdf
 │       ├── plot_photopic_melanopic.png
-│       ├── plot_real_world.pdf
-│       ├── plot_real_world.png
 │       ├── plot_tailored_analysis.pdf
 │       ├── plot_tailored_analysis.png
-│       ├── real_world_hist.pdf
-│       ├── real_world_hist.png
-│       ├── real_world_violin_plot_mean_melanopic_distribution.pdf
-│       ├── real_world_violin_plot_mean_melanopic_distribution.png
 │       ├── tailored_model.pdf
 │       ├── tailored_model.png
 │       ├── tailored_model_dose_plot.pdf
 │       ├── tailored_model_dose_plot.png
 │       ├── tailored_model_effect_plot.pdf
 │       └── tailored_model_effect_plot.png
-│   │   LightLogR/
-│   │       ├── worldmap.pdf
-│   │       └── worldmap.png
 │   tables/
 │       ├── pivot_melanopic_metadata_trajectory_canada.csv
 │       ├── pivot_photopic_melanopic_trajectory_canada.csv
 │       └── pivot_summary_trajectory_canada.csv
 │   │   LightLogR/
 │   │   │   metrics_raw/
-│   │   │       ├── location_restricted_melanopic.csv
-│   │   │       ├── location_restricted_melanopic_numeric.csv
-│   │   │       ├── naive_indoor_melanopic.csv
-│   │   │       ├── naive_indoor_melanopic_numeric.csv
-│   │   │       ├── naive_melanopic.csv
-│   │   │       ├── naive_melanopic_numeric.csv
-│   │   │       ├── naive_outdoor_melanopic.csv
-│   │   │       ├── naive_outdoor_melanopic_numeric.csv
-│   │   │       ├── time_location_restricted_melanopic.csv
-│   │   │       ├── time_location_restricted_melanopic_numeric.csv
-│   │   │       ├── time_restricted_melanopic.csv
-│   │   │       └── time_restricted_melanopic_numeric.csv
-│   │   │   timeline/
-│   │   │       ├── location_restricted_melanopic.csv
-│   │   │       ├── naive_indoor_melanopic.csv
-│   │   │       ├── naive_melanopic.csv
-│   │   │       ├── naive_outdoor_melanopic.csv
-│   │   │       ├── time_location_restricted_melanopic.csv
-│   │   │       └── time_restricted_melanopic.csv
+│   │   │       ├── activity_block_matched_melanopic.csv
+│   │   │       ├── activity_block_matched_melanopic_numeric.csv
+│   │   │       ├── broad_context_matched_melanopic.csv
+│   │   │       ├── broad_context_matched_melanopic_numeric.csv
+│   │   │       ├── exact_slot_matched_melanopic.csv
+│   │   │       ├── exact_slot_matched_melanopic_numeric.csv
+│   │   │       ├── indoor_only_bound_melanopic.csv
+│   │   │       ├── indoor_only_bound_melanopic_numeric.csv
+│   │   │       ├── outdoor_only_bound_melanopic.csv
+│   │   │       ├── outdoor_only_bound_melanopic_numeric.csv
+│   │   │       ├── unrestricted_pooled_melanopic.csv
+│   │   │       └── unrestricted_pooled_melanopic_numeric.csv
 │   │   sequences/
-│   │       ├── location_restricted_melanopic_sequence.csv
-│   │       ├── naive_indoor_melanopic_sequence.csv
-│   │       ├── naive_melanopic_sequence.csv
-│   │       ├── naive_outdoor_melanopic_sequence.csv
-│   │       ├── time_location_restricted_melanopic_sequence.csv
-│   │       └── time_restricted_melanopic_sequence.csv
+│   │       ├── activity_block_matched_melanopic_sequence.csv
+│   │       ├── broad_context_matched_melanopic_sequence.csv
+│   │       ├── exact_slot_matched_melanopic_sequence.csv
+│   │       ├── indoor_only_bound_melanopic_sequence.csv
+│   │       ├── outdoor_only_bound_melanopic_sequence.csv
+│   │       └── unrestricted_pooled_melanopic_sequence.csv
