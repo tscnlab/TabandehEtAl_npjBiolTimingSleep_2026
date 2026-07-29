@@ -52,6 +52,7 @@ results/
 │   tables/
 │       ├── pivot_melanopic_metadata_trajectory_canada.csv
 │       ├── pivot_photopic_melanopic_trajectory_canada.csv
+│       ├── pivot_summary_metrics_stats.csv
 │       └── pivot_summary_trajectory_canada.csv
 │   │   LightLogR/
 │   │   │   metrics_raw/
